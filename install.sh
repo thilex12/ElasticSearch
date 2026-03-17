@@ -13,7 +13,11 @@ curl -X PUT "localhost:9200/products" -H 'Content-Type: application/json' --data
 curl -X POST "localhost:9200/products/_bulk" -H 'Content-Type: application/x-ndjson' --data-binary @produits_bulk.json
 
 # IP Externe de la machine (pour accès depuis navigateur)
-EXTERNAL_IP=$(hostname -I | awk '{print $1}')
-echo "L'application est accessible à l'adresse : http://$EXTERNAL_IP"
+# EXTERNAL_IP=$(hostname -I | awk '{print $1}')
+# echo "L'application est accessible à l'adresse : http://$EXTERNAL_IP"
 
-echo "Pensez a ouvrir le port 80 de la machine pour acceder au site
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+# curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4
+EXTERNAL_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
+
+echo "Pensez a ouvrir le port 80 de la machine pour acceder au site"

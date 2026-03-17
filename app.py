@@ -2,20 +2,26 @@ import os
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from elasticsearch import Elasticsearch
-import yaml
 
-
-aws_ip = yaml.safe_load(open("config.yml"))["aws-ip"]
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "www")
 
-app = Flask(__name__, static_folder=BASE_DIR, static_url_path="/static")
+app = Flask(__name__)
 CORS(app)
 
 
 @app.route("/")
 def index():
     return send_from_directory(BASE_DIR, "index.html")
-es = Elasticsearch(f"http://{aws_ip}:9200")
+
+
+@app.route("/<path:filename>")
+def static_files(filename):
+    filepath = os.path.join(BASE_DIR, filename)
+    if not os.path.isfile(filepath):
+        return jsonify({"error": "Not found"}), 404
+    return send_from_directory(BASE_DIR, filename)
+
+es = Elasticsearch("http://elasticsearch:9200")
 INDEX = "produits"
 
 

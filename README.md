@@ -48,7 +48,7 @@ Moteur de recherche de produits construit avec **Elasticsearch**, **Flask** (Pyt
 ### 1. Lancer les services
 
 ```bash
-docker compose up --build -d
+sudo docker compose-up --build -d
 ```
 
 Cela démarre :
@@ -57,8 +57,8 @@ Cela démarre :
 
 Vérifier que tout est up :
 ```bash
-docker compose ps
-docker logs flask-app
+sudo docker-compose ps
+sudo docker logs flask-app
 ```
 
 ### 2. Créer l'index Elasticsearch
@@ -225,14 +225,14 @@ Les fichiers `www/` sont montés en volume dans Docker. **Pas besoin de rebuilde
 
 Un rebuild est nécessaire :
 ```bash
-docker compose up --build -d flask
+sudo docker-compose up --build -d flask
 ```
 
 ### Arrêter les services
 
 ```bash
-docker compose down          # arrête les conteneurs
-docker compose down -v       # arrête + supprime les données ES
+sudo docker-compose down          # arrête les conteneurs
+sudo docker-compose down -v       # arrête + supprime les données ES
 ```
 
 ---

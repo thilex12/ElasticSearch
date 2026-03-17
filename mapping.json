@@ -1,0 +1,98 @@
+PUT /produits
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "french_stemmer": {
+          "type": "stemmer",
+          "language": "light_french"
+        }
+      },
+      "analyzer": {
+        "french_simple": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "french_stemmer"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": { "type": "keyword" },
+
+      "nom": {
+        "type": "search_as_you_type",
+        "analyzer": "french_simple"
+      },
+
+      "description": {
+        "type": "search_as_you_type",
+        "analyzer": "french_simple"
+      },
+
+      "marque": {
+        "type": "search_as_you_type",
+        "analyzer": "french_simple"
+      },
+
+      "categories": {
+        "type": "search_as_you_type",
+        "analyzer": "french_simple"
+      },
+
+      "tags": {
+        "type": "search_as_you_type",
+        "analyzer": "french_simple"
+      },
+
+      "prix": {
+        "properties": {
+          "valeur": { "type": "float" },
+          "devise": { "type": "keyword" },
+          "prix_promotionnel": { "type": "float" },
+          "promotion_actif": { "type": "boolean" }
+        }
+      },
+
+      "disponibilite": {
+        "properties": {
+          "en_stock": { "type": "boolean" },
+          "quantite": { "type": "integer" },
+          "delai_livraison": { "type": "keyword" }
+        }
+      },
+
+      "evaluations": {
+        "properties": {
+          "note_moyenne": { "type": "float" },
+          "nombre_avis": { "type": "integer" }
+        }
+      },
+
+      "caracteristiques": {
+        "properties": {
+          "couleur": {
+            "type": "search_as_you_type",
+            "analyzer": "french_simple"
+          },
+          "taille": { "type": "keyword" },
+          "poids": { "type": "keyword" },
+          "materiaux": {
+            "type": "search_as_you_type",
+            "analyzer": "french_simple"
+          }
+        }
+      },
+
+      "images": { "type": "keyword" },
+
+      "date_ajout": { "type": "date" },
+      "date_mise_a_jour": { "type": "date" }
+    }
+  }
+}

@@ -3,15 +3,16 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from elasticsearch import Elasticsearch
 
-app = Flask(__name__, static_folder=".", static_url_path="/static")
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "www")
+
+app = Flask(__name__, static_folder=BASE_DIR, static_url_path="/static")
 CORS(app)
 
 
 @app.route("/")
 def index():
-    return send_from_directory(".", "index.html")
-
-es = Elasticsearch("http://elasticsearch:9200")
+    return send_from_directory(BASE_DIR, "index.html")
+es = Elasticsearch("http://34.236.134.56:9200")
 INDEX = "produits"
 
 

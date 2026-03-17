@@ -540,7 +540,13 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Highlight ── */
+/* ── Placeholder image ── */
+.product-card img[src^="data:"],
+.modal-product img[src^="data:"] {
+    background: #e2e8f0;
+    object-fit: contain;
+    padding: 1rem;
+}
 mark {
     background: #fef08a;
     color: inherit;

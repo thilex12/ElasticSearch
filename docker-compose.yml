@@ -1,0 +1,43 @@
+services:
+  elasticsearch:
+    image: elasticsearch:9.2.1
+    container_name: es-projet
+    environment:
+      # Désactive l'authentification et HTTPS pour ce TP
+      - xpack.security.enabled=false
+      # Si sécurité activée, fournir un mot de passe pour l'utilisateur "elastic"
+      #- "ELASTIC_PASSWORD=ISEN"
+      # Requis pour un cluster à un seul noeud
+      - discovery.type=single-node
+      # Allocation mémoire (IMPORTANT: ajustez selon votre machine)
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # Allow CORS
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
+      - http.cors.allow-methods=OPTIONS, HEAD, GET, POST, PUT, DELETE
+    ports:
+      - "9200:9200"
+    volumes:
+      # Volume pour persister les données d'Elasticsearch
+      - esdata-projet:/usr/share/elasticsearch/data
+    healthcheck:
+      # Attend que l'API soit prête (status yellow ou green)
+      test: ["CMD-SHELL", "curl -s 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' | grep -q '\"status\":\"\\(yellow\\|green\\)\"'"]
+      #test: ["CMD-SHELL", "curl -s 'http://elastic:ISEN@localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' | grep -q '\"status\":\"\\(yellow\\|green\\)\"'"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  apache:
+    image: httpd:2.4
+    container_name: apache-web
+    ports:
+      - "80:80"
+    volumes:
+      # Remplace ./www par le chemin vers ton dossier de site statique
+      - ./www:/usr/local/apache2/htdocs:ro
+    restart: unless-stopped
+
+volumes:
+  esdata-projet:
+    driver: local

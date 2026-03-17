@@ -17,7 +17,8 @@ curl -X POST "localhost:9200/products/_bulk" -H 'Content-Type: application/x-ndj
 # echo "L'application est accessible à l'adresse : http://$EXTERNAL_IP"
 
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
-# curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4
 EXTERNAL_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
+
+echo "L'application est accessible à l'adresse : http://$EXTERNAL_IP"
 
 echo "Pensez a ouvrir le port 80 de la machine pour acceder au site"

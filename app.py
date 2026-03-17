@@ -12,7 +12,7 @@ CORS(app)
 @app.route("/")
 def index():
     return send_from_directory(BASE_DIR, "index.html")
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch("http://34.236.134.56:9200")
 INDEX = "produits"
 
 

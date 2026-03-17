@@ -1,4 +1,7 @@
-// ── Config ──
+// ── Placeholder image (SVG inline, no external dependency) ──
+const PLACEHOLDER_CARD = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%2394a3b8'%3EImage indisponible%3C/text%3E%3C/svg%3E";
+const PLACEHOLDER_THUMB = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='18' fill='%2394a3b8'%3E%3F%3C/text%3E%3C/svg%3E";
+const PLACEHOLDER_MODAL = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%2394a3b8'%3EImage indisponible%3C/text%3E%3C/svg%3E";
 const API_BASE = window.location.origin;
 let currentPage = 1;
 let currentQuery = "";
@@ -66,8 +69,8 @@ async function fetchSuggestions(q) {
 
         suggestionsEl.innerHTML = data.map(item => `
             <div class="suggestion-item" data-name="${escapeHtml(item.nom)}">
-                <img src="${item.image || 'https://via.placeholder.com/40'}" alt=""
-                     onerror="this.src='https://via.placeholder.com/40'">
+                <img src="${item.image || PLACEHOLDER_THUMB}" alt=""
+                     onerror="this.onerror=null;this.src=PLACEHOLDER_THUMB">
                 <div class="suggestion-info">
                     <div class="name">${escapeHtml(item.nom)}</div>
                     <div class="brand">${escapeHtml(item.marque)}</div>
@@ -160,8 +163,8 @@ function renderResults(data) {
         return `
         <div class="product-card" onclick="showProduct('${escapeHtml(p.id)}')">
             <div class="card-img-wrapper">
-                <img src="${p.images || 'https://via.placeholder.com/300x200'}" alt="${escapeHtml(p.nom)}"
-                     loading="lazy" onerror="this.src='https://via.placeholder.com/300x200'">
+                <img src="${p.images || PLACEHOLDER_CARD}" alt="${escapeHtml(p.nom)}"
+                     loading="lazy" onerror="this.onerror=null;this.src=PLACEHOLDER_CARD">
                 ${hasPromo ? '<span class="promo-badge">PROMO</span>' : ""}
             </div>
             <div class="card-body">
@@ -265,8 +268,8 @@ async function showProduct(productId) {
 
         modalBody.innerHTML = `
             <div class="modal-product">
-                <img src="${p.images || 'https://via.placeholder.com/300'}" alt="${escapeHtml(p.nom)}"
-                     onerror="this.src='https://via.placeholder.com/300'">
+                <img src="${p.images || PLACEHOLDER_MODAL}" alt="${escapeHtml(p.nom)}"
+                     onerror="this.onerror=null;this.src=PLACEHOLDER_MODAL">
                 <div class="modal-info">
                     <h2>${escapeHtml(p.nom)}</h2>
                     <div class="brand">${escapeHtml(p.marque)}</div>

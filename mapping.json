@@ -1,4 +1,3 @@
-PUT /produits
 {
   "settings": {
     "analysis": {
@@ -37,17 +36,26 @@ PUT /produits
 
       "marque": {
         "type": "search_as_you_type",
-        "analyzer": "french_simple"
+        "analyzer": "french_simple",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
       },
 
       "categories": {
         "type": "search_as_you_type",
-        "analyzer": "french_simple"
+        "analyzer": "french_simple",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
       },
 
       "tags": {
         "type": "search_as_you_type",
-        "analyzer": "french_simple"
+        "analyzer": "french_simple",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
       },
 
       "prix": {

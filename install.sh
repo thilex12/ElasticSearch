@@ -16,4 +16,4 @@ curl -X POST "localhost:9200/products/_bulk" -H 'Content-Type: application/x-ndj
 EXTERNAL_IP=$(hostname -I | awk '{print $1}')
 echo "L'application est accessible à l'adresse : http://$EXTERNAL_IP"
 
-# Fin
+echo "Pensez a ouvrir le port 80 de la machine pour acceder au site

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchStore – Recherche Produits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">🔍 SearchStore</a>
+        <div class="search-wrapper">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque, une catégorie…"
+                       autocomplete="off">
+                <button id="searchBtn" title="Rechercher">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </button>
+                <div id="suggestions" class="suggestions hidden"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main -->
+<main class="main">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Filtres</h3>
+            <button class="btn-reset" id="resetFilters">Réinitialiser</button>
+        </div>
+
+        <div class="filter-section">
+            <h4 class="filter-title" data-toggle="filterCategories">
+                Catégories <span class="chevron">▾</span>
+            </h4>
+            <div id="filterCategories" class="filter-list"></div>
+        </div>
+
+        <div class="filter-section">
+            <h4 class="filter-title" data-toggle="filterMarques">
+                Marques <span class="chevron">▾</span>
+            </h4>
+            <div id="filterMarques" class="filter-list"></div>
+        </div>
+
+        <div class="filter-section">
+            <h4 class="filter-title">Prix (€)</h4>
+            <div class="price-range">
+                <input type="number" id="prixMin" placeholder="Min" min="0" step="1">
+                <span class="price-sep">–</span>
+                <input type="number" id="prixMax" placeholder="Max" min="0" step="1">
+            </div>
+            <button class="btn-apply" id="applyPrice">Appliquer</button>
+        </div>
+
+        <div class="filter-section">
+            <h4 class="filter-title">Note minimum</h4>
+            <div class="stars-filter" id="filterNotes">
+                <label><input type="radio" name="note" value="" checked> Toutes</label>
+                <label><input type="radio" name="note" value="4"> ⭐⭐⭐⭐ & +</label>
+                <label><input type="radio" name="note" value="3"> ⭐⭐⭐ & +</label>
+                <label><input type="radio" name="note" value="2"> ⭐⭐ & +</label>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label class="stock-filter">
+                <input type="checkbox" id="filterStock">
+                <span>En stock uniquement</span>
+            </label>
+        </div>
+
+        <div class="filter-section">
+            <h4 class="filter-title" data-toggle="filterTags">
+                Tags <span class="chevron">▾</span>
+            </h4>
+            <div id="filterTags" class="filter-list"></div>
+        </div>
+    </aside>
+
+    <!-- Results -->
+    <section class="results">
+        <div class="results-header">
+            <span id="resultCount">Chargement…</span>
+            <div class="results-controls">
+                <button class="btn-toggle-sidebar" id="toggleSidebar" title="Filtres">☰ Filtres</button>
+                <select id="sortSelect">
+                    <option value="pertinence">Pertinence</option>
+                    <option value="prix_asc">Prix ↑</option>
+                    <option value="prix_desc">Prix ↓</option>
+                    <option value="note">Meilleures notes</option>
+                    <option value="recent">Plus récents</option>
+                </select>
+            </div>
+        </div>
+        <div id="productGrid" class="product-grid"></div>
+        <div id="pagination" class="pagination"></div>
+    </section>
+</main>
+
+<!-- Product Modal -->
+<div id="modal" class="modal hidden">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script src="/static/search.js"></script>
+</body>
+</html>

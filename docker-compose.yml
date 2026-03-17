@@ -28,14 +28,14 @@ services:
       timeout: 10s
       retries: 5
 
-  apache:
-    image: httpd:2.4
-    container_name: apache-web
+  flask:
+    build: .
+    container_name: flask-app
     ports:
-      - "80:80"
-    volumes:
-      # Remplace ./www par le chemin vers ton dossier de site statique
-      - ./www:/usr/local/apache2/htdocs:ro
+      - "5000:5000"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

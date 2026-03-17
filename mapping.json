@@ -83,19 +83,19 @@
       },
 
       "caracteristiques": {
-        "properties": {
-          "couleur": {
-            "type": "search_as_you_type",
-            "analyzer": "french_simple"
-          },
-          "taille": { "type": "keyword" },
-          "poids": { "type": "keyword" },
-          "materiaux": {
-            "type": "search_as_you_type",
-            "analyzer": "french_simple"
-          }
+      "properties": {
+        "couleur": {
+          "type": "search_as_you_type",
+          "analyzer": "french_simple",
+          "fields": { "keyword": { "type": "keyword" } }
+        },
+        "materiaux": {
+          "type": "search_as_you_type",
+          "analyzer": "french_simple",
+          "fields": { "keyword": { "type": "keyword" } }
         }
-      },
+      }
+    },
 
       "images": { "type": "keyword" },
 

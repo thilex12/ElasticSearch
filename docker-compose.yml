@@ -2,8 +2,6 @@ services:
   elasticsearch:
     image: elasticsearch:9.2.1
     container_name: es-projet
-    mem_limit: 512m
-    memswap_limit: 512m
     environment:
       # Désactive l'authentification et HTTPS pour ce TP
       - xpack.security.enabled=false
@@ -12,7 +10,7 @@ services:
       # Requis pour un cluster à un seul noeud
       - discovery.type=single-node
       # Allocation mémoire (IMPORTANT: ajustez selon votre machine)
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       # Allow CORS
       - http.cors.enabled=true
       - http.cors.allow-origin="*"

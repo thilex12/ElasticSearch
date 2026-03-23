@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Update
+sudo apt update -y
+
 # Installation de Docker
 sudo apt install docker-compose curl -y
 

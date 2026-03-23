@@ -1,3 +1,8 @@
 34.236.134.56
 
 curl -X POST "http://34.236.134.56:9200/_bulk?pretty" -H "Content-Type: application/x-ndjson" --data-binary "@produits_bulk.json"
+
+
+
+curl -X PUT "http://34.236.134.56:9200/produits" -H "Content-Type: application/json" --data-binary "@mapping.json"
+

@@ -27,6 +27,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    restart: always
 
   flask:
     build: .
@@ -38,7 +39,7 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
-    restart: unless-stopped
+    restart: always
 
 volumes:
   esdata-projet:
